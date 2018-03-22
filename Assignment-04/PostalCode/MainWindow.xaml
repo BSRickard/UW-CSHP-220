@@ -1,0 +1,22 @@
+﻿<Window x:Class="PostalCodes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostalCodes"
+        mc:Ignorable="d"
+        Title="PostalCodes" Height="130" Width="260">
+    <Grid x:Name="uxGrid" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="16">
+            <TextBlock Text="Enter Postal Code:" Height="24" Width="auto" Padding="3"/>
+            <TextBox x:Name="uxPostalCode"       Height="24" Width="100"  Padding="2" TextChanged="uxPostalCode_TextChanged"/>
+        </StackPanel>
+        <Button Grid.Row="1" x:Name="uxSubmit"   Height="24" Width="60"   HorizontalAlignment="Center" 
+                Click="uxSubmit_Click" IsDefault="True" Margin="0">Submit
+        </Button>
+    </Grid>
+</Window>

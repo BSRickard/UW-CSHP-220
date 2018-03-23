@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseWindow", "MouseWindow\MouseWindow.csproj", "{2BE468D3-C048-4ACB-82A7-DA4CECD44138}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BE468D3-C048-4ACB-82A7-DA4CECD44138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE468D3-C048-4ACB-82A7-DA4CECD44138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE468D3-C048-4ACB-82A7-DA4CECD44138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE468D3-C048-4ACB-82A7-DA4CECD44138}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86AB7EF3-1CD9-4573-8F45-4A1122817F3C}
+	EndGlobalSection
+EndGlobal

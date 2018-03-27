@@ -60,13 +60,13 @@ namespace TicTacToe
                 // The second half of elements group are the labels
                 if (elementIndex++ >= TOTAL_TILE_COUNT)
                 {
-                    ((TextBlock)element).Text = "";
+                    ((TextBlock)element).Text       = "";
                     ((TextBlock)element).FontWeight = FontWeights.Normal;
                 }
             }
             turnCount = 0;
             ShowStatus(!IS_A_WINNER);
-       }
+        }
 
         private void ShowStatus(bool WeHaveAWinner)
         {
@@ -93,17 +93,24 @@ namespace TicTacToe
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Button button   = (Button)sender;
-            int row         = int.Parse(button.Tag.ToString().Substring(0, 1));
-            int column      = int.Parse(button.Tag.ToString().Substring(2, 1));
+            Button   button = (Button)sender;
+            int         row = int.Parse(button.Tag.ToString().Substring(0, 1));
+            int      column = int.Parse(button.Tag.ToString().Substring(2, 1));
             TextBlock label = (TextBlock)uxGrid.Children[TOTAL_TILE_COUNT + row * TILES_PER_SIDE + column];
+
+            // If tile already played, ignore
             if ("" != label.Text) return;
+
             label.Text = playerUp;
             ShowStatus(IsAWinner(row, column));
         }
 
         private bool IsAWinner(int Row, int Column)
         {
+            // If fewer than a minimum number of turns, can't have a winner
+            if (turnCount < (2 * TILES_PER_SIDE - 1)) return false;
+
+            bool isAWinner  = false;
             int scoreRow    = 0;
             int scoreColumn = 0;
             for (int index  = 0; index < TILES_PER_SIDE; ++index)
@@ -124,7 +131,7 @@ namespace TicTacToe
                     ((TextBlock)uxGrid.Children[TOTAL_TILE_COUNT + Row * TILES_PER_SIDE + index]).FontWeight
                         = FontWeights.Bold;
                 }
-                return IS_A_WINNER;
+                isAWinner = true;
             }
             if (scoreColumn == TILES_PER_SIDE)
             {
@@ -133,7 +140,7 @@ namespace TicTacToe
                     ((TextBlock)uxGrid.Children[TOTAL_TILE_COUNT + index * TILES_PER_SIDE + Column]).FontWeight
                         = FontWeights.Bold;
                 }
-                return IS_A_WINNER;
+                isAWinner = true;
             }
             // If placed at corner or centre...
             if ((Row * TILES_PER_SIDE + Column) % (TILES_PER_SIDE - 1) == 0)
@@ -142,25 +149,25 @@ namespace TicTacToe
                 int scoreDiag = 0;
                 for (int index = 0; index < TOTAL_TILE_COUNT; index += TILES_PER_SIDE + 1)
                 {
-                    if (playerUp == ((TextBlock)uxGrid.Children[TOTAL_TILE_COUNT + 
+                    if (playerUp == ((TextBlock)uxGrid.Children[TOTAL_TILE_COUNT +
                         (int)(index / TILES_PER_SIDE) * TILES_PER_SIDE + index % TILES_PER_SIDE]).Text) scoreDiag++;
                 }
                 if (scoreDiag == TILES_PER_SIDE)
                 {
                     for (int index = 0; index < TOTAL_TILE_COUNT; index += TILES_PER_SIDE + 1)
                     {
-                        ((TextBlock)uxGrid.Children[TOTAL_TILE_COUNT + 
-                            (int)(index / TILES_PER_SIDE) * TILES_PER_SIDE + index % TILES_PER_SIDE]).FontWeight 
+                        ((TextBlock)uxGrid.Children[TOTAL_TILE_COUNT +
+                            (int)(index / TILES_PER_SIDE) * TILES_PER_SIDE + index % TILES_PER_SIDE]).FontWeight
                             = FontWeights.Bold;
                     }
-                    return IS_A_WINNER;
+                    isAWinner = true;
                 }
                 scoreDiag = 0;
-                for (int index = TILES_PER_SIDE - 1; 
-                    index < (TOTAL_TILE_COUNT - (TILES_PER_SIDE - 1)); 
+                for (int index = TILES_PER_SIDE - 1;
+                    index < (TOTAL_TILE_COUNT - (TILES_PER_SIDE - 1));
                     index += TILES_PER_SIDE - 1)
                 {
-                    if (playerUp == ((TextBlock)uxGrid.Children[TOTAL_TILE_COUNT + 
+                    if (playerUp == ((TextBlock)uxGrid.Children[TOTAL_TILE_COUNT +
                         (int)(index / TILES_PER_SIDE) * TILES_PER_SIDE + index % TILES_PER_SIDE]).Text) scoreDiag++;
                 }
                 if (scoreDiag == TILES_PER_SIDE)
@@ -173,10 +180,10 @@ namespace TicTacToe
                             (int)(index / TILES_PER_SIDE) * TILES_PER_SIDE + index % TILES_PER_SIDE]).FontWeight
                             = FontWeights.Bold;
                     }
-                    return IS_A_WINNER;
+                    isAWinner = true;
                 }
             }
-            return !IS_A_WINNER;
+            return isAWinner;
         }
 
         private void uxExit_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,51 @@
+﻿<Window x:Class="InventoryApp.ManufacturerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InventoryApp"
+        mc:Ignorable="d"
+        Title="Manufacturer" Height="240" Width="400"
+        FocusManager.FocusedElement="{Binding ElementName=uxMfgName}"
+        Loaded="Window_Loaded">
+    
+    <Grid x:Name="uxMfgGrid" Margin="3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="ID:"                                                         Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBox   Name="uxMfgId"                 Text="{Binding Id}"                 Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="30" IsEnabled="False"/>
+        <TextBlock Text="Name:"                                                       Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBox   Name="uxMfgName"               Text="{Binding Name}"               Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="270"/>
+        <TextBlock Text="Our Abbreviation:"                                           Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBox   Name="uxMfgOurAbbreviation"    Text="{Binding OurAbbreviation}"    Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Width="270"/>
+        <TextBlock Text="Parent Corp.:"                                               Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBox   Name="uxMfgParentCorp"         Text="{Binding ParentCorp}"         Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Width="270"/>
+        <TextBlock Text="Default Category:"                                           Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBox   Name="uxMfgDefaultCategory"    Text="{Binding DefaultCategory}"    Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Width="270"/>
+        <TextBlock Text="Default Goods Origin:"                                       Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBox   Name="uxMfgDefaultGoodsOrigin" Text="{Binding DefaultGoodsOrigin}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Width="270"/>
+        <TextBlock Text="Source Of Origin Info:"                                      Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBox   Name="uxMfgSourceOfOriginInfo" Text="{Binding SourceOfOriginInfo}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="270"/>
+        <TextBlock Text="Web Site:"                                                   Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBox   Name="uxMfgWebSite"            Text="{Binding WebSite}"            Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Width="270"/>
+        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" Margin="0">
+            <Separator Height="50"/>
+            <Button x:Name="uxSubmit" Content="Submit" Click="uxSubmit_Click" Width="100" Height="25" HorizontalAlignment="Center" Margin="10" IsDefault="True"/>
+            <Button x:Name="uxCancel" Content="Cancel" Click="uxCancel_Click" Width="100" Height="25" HorizontalAlignment="Center" Margin="10" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

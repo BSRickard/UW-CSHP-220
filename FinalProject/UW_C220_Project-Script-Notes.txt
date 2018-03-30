@@ -1,0 +1,13 @@
+Hi, this is Brian, and I'm going to demonstrate my Windows Presentation Foundation app that integrates with a SQL database to track the inventory of goods used in the production of an offshore cruising motoryacht. Ideally this would be used to monitor the progress of each item from the time of specification and ordering through acquisition, staging, installation, commissioning and delivery of the final product.
+
+Ultimately, I would like to incorporate 1D and 2D barcode scanning into an application that can be run on a smart phone to further aid the automation of the process.
+
+I have previously developed much of the basic concept in the form of inter-related worksheets of a spreadsheet, as can be seen here. For my C# project I have attempted to translate this into a relational SQL database, however I still have a lot of work to do in that regard, so today I'll only be demonstrating a small subset of the intended functionality.
+
+One thing that proved a bit of a challenge was working with multiple SQL tables, rather than just one. Even after I got this working for two tables, adding a third table still took a lot of tedious manipulation of copies of the first two, particularly as the number of columns or properties grew significantly. The Product table, for instance, has 23 columns.
+
+I also haven't actually yet worked out how best to make my application properly operate in a truly relational manner, such that some of the properties of one table are actually indexes to one or more other tables. Each record in the Product table, for instance, can be categorized according to to the Category table and be associated with its manufacturer from the Manufacturer table. Right now I am only manually entering the key index of this cross-reference into the Product table, but what I really want is for this to be behind-the-scenes so the user would simply select a category from a drop-down list and similarly the manufacturer. As more of the database becomes integrated, this pattern would also extend to other tables such as vendors, countries of origin and currency conversions and more.
+
+I'd also like to provide media references, including prodcut images and functional links to a product web page, safety data sheet, promotional flyer and installation and operational instructions that can be accessed by those involved at all stages from product specification, ordering, handling, shipping, installing and testing right down to the end user's operation and maintenance.
+
+While a natural extension of this would be to also track things like quantity-on-hand and value, the goal is primarily to be able to follow a product throughout the entire process.

@@ -1,0 +1,136 @@
+﻿<Window x:Class="InventoryApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InventoryApp"
+        mc:Ignorable="d"
+        Title="Inventory Tracker" Height="350" Width="525">
+    <StackPanel>
+            <Menu>
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="uxFileNew"    Header="_New"    Click="uxMfgNew_Click"/>
+                    <MenuItem x:Name="uxFileChange" Header="_Modify" Click="uxMfgChange_Click" Loaded="uxMfgChange_Loaded"/>
+                    <MenuItem x:Name="uxFileDelete" Header="_Delete" Click="uxMfgDelete_Click" Loaded="uxMfgDelete_Loaded"/>
+                    <MenuItem x:Name="uxFileExit"   Header="E_xit"   Click="uxFileExit_Click"/>
+                </MenuItem>
+            </Menu>
+            <TabControl x:Name="uxTab">
+                <TabItem Header="Manufacturers">
+                    <ListView x:Name="uxMfgList" Height="275" SelectionChanged="uxMfgList_SelectionChanged" MouseDoubleClick="uxMfgChange_Click">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="uxMfgNew"    Header="_New"    Click="uxMfgNew_Click"/>
+                                <MenuItem x:Name="uxMfgChange" Header="_Modify" Click="uxMfgChange_Click" Loaded="uxMfgChange_Loaded"/>
+                                <MenuItem x:Name="uxMfgDelete" Header="_Delete" Click="uxMfgDelete_Click" Loaded="uxMfgDelete_Loaded"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Manufacturer Information">
+                                <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="30">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Tag="Id" Click="uxMfgListColumnHeader_Click">Id</GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="170">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Tag="Name" Click="uxMfgListColumnHeader_Click">Name</GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding OurAbbreviation}" Width="40">
+                                    <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="OurAbbreviation" Click="uxMfgListColumnHeader_Click">Abbr.</GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding ParentCorp}" Width="120">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Tag="ParentCorp" Click="uxMfgListColumnHeader_Click">Parent Corp.</GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding DefaultCategory}" Width="150">
+                                    <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="DefaultCategory" Click="uxMfgListColumnHeader_Click">Default Category</GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem>
+            <TabItem Header="Categories">
+                <ListView x:Name="uxCategoryList" Height="275" SelectionChanged="uxCategoryList_SelectionChanged" MouseDoubleClick="uxCategoryChange_Click">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="uxCategoryNew"    Header="_New"    Click="uxCategoryNew_Click"/>
+                            <MenuItem x:Name="uxCategoryChange" Header="_Modify" Click="uxCategoryChange_Click" Loaded="uxCategoryChange_Loaded"/>
+                            <MenuItem x:Name="uxCategoryDelete" Header="_Delete" Click="uxCategoryDelete_Click" Loaded="uxCategoryDelete_Loaded"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Manufacturer Information">
+                            <GridViewColumn DisplayMemberBinding="{Binding Parent}" Width="200">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Parent" Click="uxCategoryListColumnHeader_Click">Parent</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Description}" Width="300">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Description" Click="uxCategoryListColumnHeader_Click">Description</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Products">
+                <ListView x:Name="uxProductList" Height="275" SelectionChanged="uxProductList_SelectionChanged" MouseDoubleClick="uxProductChange_Click">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="uxProductNew"    Header="_New"    Click="uxProductNew_Click"/>
+                            <MenuItem x:Name="uxProductChange" Header="_Modify" Click="uxProductChange_Click" Loaded="uxProductChange_Loaded"/>
+                            <MenuItem x:Name="uxProductDelete" Header="_Delete" Click="uxProductDelete_Click" Loaded="uxProductDelete_Loaded"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Manufacturer Information">
+                            <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="30">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Id" Click="uxProductListColumnHeader_Click">Id</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Category}" Width="150">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Category" Click="uxProductListColumnHeader_Click">Category</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding OurPartNumber}" Width="128">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="OurPartNumber" Click="uxProductListColumnHeader_Click">Our Part Number</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Description}" Width="200">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Description" Click="uxProductListColumnHeader_Click">Description</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Manufacturer}" Width="150">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Manufacturer" Click="uxProductListColumnHeader_Click">Manufacturer</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Price1}" Width="150">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Price" Click="uxProductListColumnHeader_Click">Price</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding GoodsOrigin}" Width="150">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Origin" Click="uxProductListColumnHeader_Click">Origin</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</Window>

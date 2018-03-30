@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parent" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="nchar" MaxLength="20" />
+          <Property Name="Symbol" Type="char" MaxLength="1" />
+          <Property Name="Abbreviation" Type="char" MaxLength="3" />
+          <Property Name="RatePerUSD" Type="decimal" Precision="12" Scale="6" />
+        </EntityType>
+        <EntityType Name="LocationTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="OurAbbreviation" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="ParentCorp" Type="nvarchar" MaxLength="30" />
+          <Property Name="DefaultCategory" Type="int" Nullable="false" />
+          <Property Name="DefaultGoodsOrigin" Type="char" MaxLength="2" />
+          <Property Name="SourceOfOriginInfo" Type="int" />
+          <Property Name="WebSite" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="OriginSourceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OurPartNumber" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Manufacturer" Type="int" Nullable="false" />
+          <Property Name="MfgPartNumber" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MfgBarCode2D" Type="varchar" MaxLength="32" />
+          <Property Name="Description" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Unit" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="GoodsOrigin" Type="char" MaxLength="2" />
+          <Property Name="SourceOfOriginInfo" Type="int" />
+          <Property Name="Tariff" Type="char" MaxLength="10" />
+          <Property Name="Mass" Type="real" />
+          <Property Name="VendorOne" Type="int" Nullable="false" />
+          <Property Name="VendorOnePrice" Type="smallmoney" />
+          <Property Name="VendorOneCurrency" Type="int" Nullable="false" />
+          <Property Name="VendorTwo" Type="int" />
+          <Property Name="VendorTwoPrice" Type="smallmoney" />
+          <Property Name="VendorTwoCurrency" Type="int" />
+          <Property Name="Picture" Type="varchar" MaxLength="150" />
+          <Property Name="WebPage" Type="varchar" MaxLength="150" />
+          <Property Name="Flyer" Type="varchar" MaxLength="150" />
+          <Property Name="Instructions" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="ProductTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="OrderNumber" Type="int" Nullable="false" />
+          <Property Name="OrderLine" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Unit" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="CostUSD" Type="smallmoney" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="OurAbbreviation" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="NickName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ParentCorp" Type="nvarchar" MaxLength="40" />
+          <Property Name="DefaultCategory" Type="int" Nullable="false" />
+          <Property Name="DefaultGoodsOrigin" Type="char" MaxLength="2" />
+          <Property Name="SourceOfOriginInfo" Type="int" />
+          <Property Name="WebSite" Type="varchar" MaxLength="80" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="40" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="40" />
+          <Property Name="City" Type="nvarchar" MaxLength="30" />
+          <Property Name="StateOrProvince" Type="nvarchar" MaxLength="30" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Country" Type="char" MaxLength="2" />
+          <Property Name="PhoneMain" Type="varchar" MaxLength="15" />
+          <Property Name="SalesContact" Type="varchar" MaxLength="20" />
+          <Property Name="SalesPhone" Type="varchar" MaxLength="15" />
+          <Property Name="SalesEmail" Type="varchar" MaxLength="40" />
+          <Property Name="AcctgContact" Type="varchar" MaxLength="20" />
+          <Property Name="AcctgPhone" Type="varchar" MaxLength="15" />
+          <Property Name="AcctgEmail" Type="varchar" MaxLength="20" />
+          <Property Name="Notes" Type="text" />
+        </EntityType>
+        <EntityContainer Name="InventoryModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationTag" EntityType="Self.LocationTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OriginSourceType" EntityType="Self.OriginSourceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTag" EntityType="Self.ProductTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parent" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Symbol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Abbreviation" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="RatePerUSD" Type="Decimal" Precision="12" Scale="6" />
+        </EntityType>
+        <EntityType Name="LocationTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OurAbbreviation" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentCorp" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultCategory" Type="Int32" Nullable="false" />
+          <Property Name="DefaultGoodsOrigin" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="SourceOfOriginInfo" Type="Int32" />
+          <Property Name="WebSite" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OriginSourceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OurPartNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="MfgPartNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MfgBarCode2D" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <Property Name="GoodsOrigin" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="SourceOfOriginInfo" Type="Int32" />
+          <Property Name="Tariff" Type="String" />
+          <Property Name="Mass" Type="Single" />
+          <Property Name="VendorOne" Type="Int32" Nullable="false" />
+          <Property Name="VendorOnePrice" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="VendorOneCurrency" Type="Int32" Nullable="false" />
+          <Property Name="VendorTwo" Type="Int32" />
+          <Property Name="VendorTwoPrice" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="VendorTwoCurrency" Type="Int32" />
+          <Property Name="Picture" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="WebPage" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Flyer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Instructions" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProductTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="OrderNumber" Type="Int32" Nullable="false" />
+          <Property Name="OrderLine" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Unit" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CostUSD" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OurAbbreviation" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentCorp" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultCategory" Type="Int32" Nullable="false" />
+          <Property Name="DefaultGoodsOrigin" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="SourceOfOriginInfo" Type="Int32" />
+          <Property Name="WebSite" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="StateOrProvince" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="PhoneMain" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SalesContact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SalesPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SalesEmail" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="AcctgContact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AcctgPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="AcctgEmail" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Currencies" EntityType="Self.Currency" />
+          <EntitySet Name="LocationTags" EntityType="Self.LocationTag" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturer" />
+          <EntitySet Name="OriginSourceTypes" EntityType="Self.OriginSourceType" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductTags" EntityType="Self.ProductTag" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="InventoryModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="InventoryModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="RatePerUSD" ColumnName="RatePerUSD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationTags">
+            <EntityTypeMapping TypeName="InventoryModel.LocationTag">
+              <MappingFragment StoreEntitySet="LocationTag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="InventoryModel.Manufacturer">
+              <MappingFragment StoreEntitySet="Manufacturer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OurAbbreviation" ColumnName="OurAbbreviation" />
+                <ScalarProperty Name="ParentCorp" ColumnName="ParentCorp" />
+                <ScalarProperty Name="DefaultCategory" ColumnName="DefaultCategory" />
+                <ScalarProperty Name="DefaultGoodsOrigin" ColumnName="DefaultGoodsOrigin" />
+                <ScalarProperty Name="SourceOfOriginInfo" ColumnName="SourceOfOriginInfo" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OriginSourceTypes">
+            <EntityTypeMapping TypeName="InventoryModel.OriginSourceType">
+              <MappingFragment StoreEntitySet="OriginSourceType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="InventoryModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OurPartNumber" ColumnName="OurPartNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="MfgPartNumber" ColumnName="MfgPartNumber" />
+                <ScalarProperty Name="MfgBarCode2D" ColumnName="MfgBarCode2D" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="GoodsOrigin" ColumnName="GoodsOrigin" />
+                <ScalarProperty Name="SourceOfOriginInfo" ColumnName="SourceOfOriginInfo" />
+                <ScalarProperty Name="Tariff" ColumnName="Tariff" />
+                <ScalarProperty Name="Mass" ColumnName="Mass" />
+                <ScalarProperty Name="VendorOne" ColumnName="VendorOne" />
+                <ScalarProperty Name="VendorOnePrice" ColumnName="VendorOnePrice" />
+                <ScalarProperty Name="VendorOneCurrency" ColumnName="VendorOneCurrency" />
+                <ScalarProperty Name="VendorTwo" ColumnName="VendorTwo" />
+                <ScalarProperty Name="VendorTwoPrice" ColumnName="VendorTwoPrice" />
+                <ScalarProperty Name="VendorTwoCurrency" ColumnName="VendorTwoCurrency" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="WebPage" ColumnName="WebPage" />
+                <ScalarProperty Name="Flyer" ColumnName="Flyer" />
+                <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTags">
+            <EntityTypeMapping TypeName="InventoryModel.ProductTag">
+              <MappingFragment StoreEntitySet="ProductTag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="CostUSD" ColumnName="CostUSD" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="InventoryModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="InventoryModel.Vendor">
+              <MappingFragment StoreEntitySet="Vendor">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="AcctgEmail" ColumnName="AcctgEmail" />
+                <ScalarProperty Name="AcctgPhone" ColumnName="AcctgPhone" />
+                <ScalarProperty Name="AcctgContact" ColumnName="AcctgContact" />
+                <ScalarProperty Name="SalesEmail" ColumnName="SalesEmail" />
+                <ScalarProperty Name="SalesPhone" ColumnName="SalesPhone" />
+                <ScalarProperty Name="SalesContact" ColumnName="SalesContact" />
+                <ScalarProperty Name="PhoneMain" ColumnName="PhoneMain" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OurAbbreviation" ColumnName="OurAbbreviation" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="ParentCorp" ColumnName="ParentCorp" />
+                <ScalarProperty Name="DefaultCategory" ColumnName="DefaultCategory" />
+                <ScalarProperty Name="DefaultGoodsOrigin" ColumnName="DefaultGoodsOrigin" />
+                <ScalarProperty Name="SourceOfOriginInfo" ColumnName="SourceOfOriginInfo" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateOrProvince" ColumnName="StateOrProvince" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
